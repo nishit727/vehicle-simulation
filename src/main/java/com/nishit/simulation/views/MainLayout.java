@@ -2,38 +2,24 @@ package com.nishit.simulation.views;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
+import com.nishit.simulation.views.vehiclesimulation.VehicleSimulationView;
 import com.vaadin.flow.component.Component;
-import com.vaadin.flow.component.ComponentUtil;
-import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
 import com.vaadin.flow.component.button.ButtonVariant;
-import com.vaadin.flow.component.html.Image;
-import com.vaadin.flow.component.html.ListItem;
 import com.vaadin.flow.component.html.Nav;
 import com.vaadin.flow.component.html.Span;
-import com.vaadin.flow.component.html.UnorderedList;
 import com.vaadin.flow.component.html.Footer;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.html.Header;
-import com.vaadin.flow.component.orderedlayout.FlexComponent;
-import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
-import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.component.tabs.Tab;
-import com.vaadin.flow.component.tabs.Tabs;
-import com.vaadin.flow.component.tabs.TabsVariant;
+import com.vaadin.flow.component.page.Push;
 import com.vaadin.flow.router.RouterLink;
-import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.server.PWA;
 import com.vaadin.flow.theme.Theme;
-import com.nishit.simulation.views.MainLayout;
-import com.nishit.simulation.views.vehiclesimulation.VehicleSimulationView;
-import com.vaadin.flow.component.avatar.Avatar;
 
 /**
  * The main view is a top-level placeholder for other views.
@@ -41,6 +27,7 @@ import com.vaadin.flow.component.avatar.Avatar;
 @PWA(name = "Vehicle Simulation", shortName = "Vehicle Simulation", enableInstallPrompt = false)
 @Theme(themeFolder = "vehiclesimulation")
 @PageTitle("Main")
+@Push
 public class MainLayout extends AppLayout {
 
     public static class MenuItemInfo {
@@ -111,14 +98,8 @@ public class MainLayout extends AppLayout {
         views.addClassNames("flex", "h-m", "items-center", "mx-m", "my-0", "text-s", "text-tertiary");
         views.setId("views");
 
-        // Wrap the links in a list; improves accessibility
-        UnorderedList list = new UnorderedList();
-        list.addClassNames("list-none", "m-0", "p-0");
-        nav.add(list);
-
         for (RouterLink link : createLinks()) {
-            ListItem item = new ListItem(link);
-            list.add(item);
+            nav.add(link);
         }
         return nav;
     }
